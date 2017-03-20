@@ -1,0 +1,9 @@
+name: LoysoPlugin
+version: 1
+author: Loyso
+main: fr.loyso.spigotplugin.Plugin
+
+commands:
+    ping:
+        description: Testing command
+        usage: /ping
