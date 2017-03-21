@@ -1,2 +1,2 @@
-# plugin
-Plugin for Bukkit/Spigot servers
+# thetowersplugin
+Minecraft plugin for Spigot/Bukkit servers, for "The Towers" map
