@@ -1,9 +1,15 @@
-name: LoysoPlugin
-version: 1
+name: TheTowersPlugin
+version: 1.0
 author: Loyso
-main: fr.loyso.spigotplugin.Plugin
+main: fr.loyso.ttplugin.Plugin
 
 commands:
     ping:
         description: Testing command
         usage: /ping
+    newgame:
+            description: WIP
+            usage: /newgame
+    stoptest:
+                description: WIP
+                usage: /stoptest

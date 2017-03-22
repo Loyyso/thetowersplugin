@@ -1,13 +1,12 @@
 
-package fr.loyso.spigotplugin;
+package fr.loyso.ttplugin;
 
-import java.util.HashMap;
-
-import fr.loyso.spigotplugin.commands.list.CommandPing;
-import fr.loyso.spigotplugin.listeners.BlockListener;
-import fr.loyso.spigotplugin.listeners.PlayerListener;
+import fr.loyso.ttplugin.commands.CommandNewGame;
+import fr.loyso.ttplugin.commands.CommandPing;
+import fr.loyso.ttplugin.commands.CommandStopTest;
+import fr.loyso.ttplugin.listeners.BlockListener;
+import fr.loyso.ttplugin.listeners.PlayerListener;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +24,8 @@ public class Plugin extends JavaPlugin {
 
         // Register our commands
         getCommand("ping").setExecutor(new CommandPing());
+        getCommand("newgame").setExecutor(new CommandNewGame());
+        getCommand("stoptest").setExecutor((new CommandStopTest()));
 
         PluginDescriptionFile pdfFile = this.getDescription();
         getLogger().info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );

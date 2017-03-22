@@ -1,7 +1,7 @@
 
-package fr.loyso.spigotplugin.listeners;
+package fr.loyso.ttplugin.listeners;
 
-import fr.loyso.spigotplugin.Plugin;
+import fr.loyso.ttplugin.Plugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;

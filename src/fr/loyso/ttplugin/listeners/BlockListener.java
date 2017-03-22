@@ -1,7 +1,7 @@
 
-package fr.loyso.spigotplugin.listeners;
+package fr.loyso.ttplugin.listeners;
 
-import fr.loyso.spigotplugin.Plugin;
+import fr.loyso.ttplugin.Plugin;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
