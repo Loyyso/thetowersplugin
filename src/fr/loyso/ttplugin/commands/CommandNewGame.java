@@ -1,17 +1,14 @@
 package fr.loyso.ttplugin.commands;
 
-import fr.loyso.ttplugin.Plugin;
-import fr.loyso.ttplugin.TTProperties;
-import java.util.Properties;
-import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,25 +43,57 @@ public class CommandNewGame implements CommandExecutor {
         }
     }
 
+    public boolean deleteWorld(File path) {
+        if(path.exists()) {
+            File files[] = path.listFiles();
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteWorld(files[i]);
+                } else {
+                    files[i].delete();
+                }
+            }
+        }
+        return(path.delete());
+    }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         if (commandSender instanceof Player) {
             File file = new File("");
             File template = new File(file.getAbsolutePath() + "\\TowersTemplate");
-            File serverProperties = new File(file.getAbsolutePath() + "\\server.properties");
+            File runningGame = new File(file.getAbsolutePath() + "\\currentGame");
+            World templateWorld = Bukkit.getWorld("TowersTemplate");
             if (template.exists()) {
-                FileInputStream in = null;
-                Properties properties = new Properties();
+                Bukkit.getServer().getWorlds().add(templateWorld);
+
+                for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+                    PlayerInventory inventory = player.getInventory();
+                    inventory.clear();
+                    Location spawn = new Location(Bukkit.getWorld("currentGame"), 0,64,1024);
+                    player.teleport(spawn);
+                    player.kickPlayer("The server is restarting, come back in a few seconds!");
+                }
+
+                for(Chunk c : Bukkit.getWorld("currentGame").getLoadedChunks()) {
+                    c.unload(false);
+                }
+                Bukkit.getServer().unloadWorld(Bukkit.getWorld("currentGame"), true);
+                deleteWorld(runningGame);
+                copyWorld(template, runningGame);
+
+                Bukkit.getWorlds().add(Bukkit.getWorld("currentGame"));
+                Bukkit.getServer().unloadWorld(templateWorld, true);
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop");
 
                 //Player sender = (Player) commandSender;
                 //sender.sendMessage(file.getAbsolutePath() + "\\server.properties");
                 //Bukkit.getServer().getConsoleSender().sendMessage(file.getAbsolutePath() + "\\server.properties");
 
-                try{
+                /*try{
                     in = new FileInputStream(serverProperties);
                     properties.load(in);
-                    properties.getProperty("enable-command-block");
-                    if (properties.getProperty("enable-command-block").contentEquals("true")) {
+                    if (TTProperties.ServerProperty.COMMAND_BLOCKS) {
                         Player sender = (Player) commandSender;
                         sender.sendMessage("test");
                         Bukkit.getServer().broadcastMessage("testfdgskjo");
@@ -94,7 +123,7 @@ public class CommandNewGame implements CommandExecutor {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
             }
 
             /*String currentDirectory;

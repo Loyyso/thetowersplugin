@@ -3,7 +3,6 @@ package fr.loyso.ttplugin;
 
 import fr.loyso.ttplugin.commands.CommandNewGame;
 import fr.loyso.ttplugin.commands.CommandPing;
-import fr.loyso.ttplugin.commands.CommandStopTest;
 import fr.loyso.ttplugin.listeners.BlockListener;
 import fr.loyso.ttplugin.listeners.PlayerListener;
 import org.bukkit.Bukkit;
@@ -25,10 +24,14 @@ public class Plugin extends JavaPlugin {
         // Register our commands
         getCommand("ping").setExecutor(new CommandPing());
         getCommand("newgame").setExecutor(new CommandNewGame());
-        getCommand("stoptest").setExecutor((new CommandStopTest()));
 
+        //Other things
         PluginDescriptionFile pdfFile = this.getDescription();
         getLogger().info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
+        Bukkit.getServer().broadcastMessage("[INFO] **********************************************************");
+        Bukkit.getServer().broadcastMessage("[INFO] Make sure the commands blocks are disabled on your server!");
+        Bukkit.getServer().broadcastMessage("[INFO] **********************************************************");
+        Bukkit.getServer().broadcastMessage("[INFO] Execute /newgame to launch a new game!");
     }
 
     @Override
