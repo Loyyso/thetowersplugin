@@ -46,6 +46,7 @@ public class TeamListener implements Listener {
             } else if (!redTeam.hasEntry(playerString)) {
                 redTeam.addEntry(playerString);
                 player.teleport(redHub);
+                player.sendMessage("You joined §cRED§r team!");
             } else if (redTeam.getEntries().contains(playerString)){
                 player.sendMessage("You are already in §cRED§r team!");
                 player.teleport(redHub);
@@ -64,6 +65,7 @@ public class TeamListener implements Listener {
             } else if (!blueTeam.hasEntry(playerString)) {
                 blueTeam.addEntry(playerString);
                 player.teleport(blueHub);
+                player.sendMessage("You joined §9BLUE§r team!");
             } else if (blueTeam.getEntries().contains(playerString)){
                 player.sendMessage("You are already in §9BLUE§r team!");
                 player.teleport(blueHub);
