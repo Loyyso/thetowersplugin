@@ -51,6 +51,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if(event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            Bukkit.getServer().broadcast("trers","gds");
         }
     }
 

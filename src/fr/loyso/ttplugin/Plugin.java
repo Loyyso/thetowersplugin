@@ -7,12 +7,14 @@ import fr.loyso.ttplugin.listeners.BlockListener;
 import fr.loyso.ttplugin.listeners.PlayerListener;
 import fr.loyso.ttplugin.listeners.TeamListener;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
+
+import java.util.List;
 
 public class Plugin extends JavaPlugin {
     PlayerListener playerListener = new PlayerListener(this);
@@ -39,10 +41,9 @@ public class Plugin extends JavaPlugin {
         Bukkit.getServer().broadcastMessage("[INFO] **********************************************************");
         Bukkit.getServer().broadcastMessage("[INFO] Execute /newgame to launch a new game!");
 
-        ScoreboardManager scbManager = Bukkit.getScoreboardManager();
-        Scoreboard board = scbManager.getMainScoreboard();
-        Team redTeam = board.registerNewTeam("Red");
-        Team blueTeam = board.registerNewTeam("Blue");
+        //Create and configure teams
+        Scoreboards.setTeams();
+
     }
 
     @Override
