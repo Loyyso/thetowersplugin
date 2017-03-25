@@ -37,17 +37,11 @@ public class TeamListener implements Listener {
         Location redHub = new Location(Bukkit.getWorld("currentGame"), 29, 64, 992);
 
         if ((playerX == 8) && (playerY == 65) && (playerZ == 1024)) {
-            if (!redTeam.getEntries().equals("")) {
-                if (!redTeam.hasEntry(playerString)) {
-                    redTeam.addEntry(playerString);
-                    player.teleport(redHub);
-                    player.sendMessage("You joined §cRED§r team!");
-                }
-            } else if (!redTeam.hasEntry(playerString)) {
+            if (!redTeam.hasEntry(playerString)) {
                 redTeam.addEntry(playerString);
                 player.teleport(redHub);
                 player.sendMessage("You joined §cRED§r team!");
-            } else if (redTeam.getEntries().contains(playerString)){
+            } else if (redTeam.getEntries().contains(playerString)) {
                 player.sendMessage("You are already in §cRED§r team!");
                 player.teleport(redHub);
             }
@@ -56,13 +50,7 @@ public class TeamListener implements Listener {
         Location blueJoinLocation = new Location(Bukkit.getWorld("currentGame"), -8, 65, 1024);
         Location blueHub = new Location(Bukkit.getWorld("currentGame"), -28, 64, 992);
         if ((playerX == -8) && (playerY == 65) && (playerZ == 1024)) {
-            if (!blueTeam.getEntries().equals("")) {
-                if (!blueTeam.hasEntry(playerString)) {
-                    blueTeam.addEntry(playerString);
-                    player.teleport(blueHub);
-                    player.sendMessage("You joined §9BLUE§r team!");
-                }
-            } else if (!blueTeam.hasEntry(playerString)) {
+            if (!blueTeam.hasEntry(playerString)) {
                 blueTeam.addEntry(playerString);
                 player.teleport(blueHub);
                 player.sendMessage("You joined §9BLUE§r team!");
@@ -76,13 +64,9 @@ public class TeamListener implements Listener {
         Location redLeaveLocation = new Location(Bukkit.getWorld("currentGame"),16, 65, 992);
 
         if ((playerX == 16) && (playerY == 65) && (playerZ == 992)) {
-            if (!redTeam.getEntries().equals("")) {
-                if (!redTeam.hasEntry(playerString)) {
-                    player.teleport(spawn);
-                }
-            } else if (!redTeam.hasEntry(playerString)) {
+            if (!redTeam.hasEntry(playerString)) {
                 player.teleport(spawn);
-            } else if (redTeam.getEntries().contains(playerString)){
+            } else if (redTeam.getEntries().contains(playerString)) {
                 redTeam.removeEntry(playerString);
                 player.sendMessage("You left §cRED§r team!");
                 player.teleport(spawn);
@@ -91,11 +75,7 @@ public class TeamListener implements Listener {
         //----------Leave blue team----------
         Location blueLeaveLocation = new Location(Bukkit.getWorld("currentGame"), -16, 65, 992);
         if ((playerX == -16) && (playerY == 65) && (playerZ == 992)) {
-            if (!blueTeam.getEntries().equals("")) {
-                if (!blueTeam.hasEntry(playerString)) {
-                    player.teleport(spawn);
-                }
-            } else if (!blueTeam.hasEntry(playerString)) {
+            if (!blueTeam.hasEntry(playerString)) {
                 player.teleport(spawn);
             } else if (blueTeam.getEntries().contains(playerString)){
                 blueTeam.removeEntry(playerString);
