@@ -1,12 +1,12 @@
 package fr.loyso.ttplugin.commands;
 
-import fr.loyso.ttplugin.listeners.PlayerListener;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,6 +84,9 @@ public class CommandNewGame implements CommandExecutor {
                 Bukkit.getWorlds().add(Bukkit.getWorld("currentGame"));
                 Bukkit.getServer().unloadWorld(templateWorld, true);
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop");
+            } else {
+                commandSender.sendMessage("[-> Template world not found!");
+                commandSender.sendMessage("[-> Please put The Towers in your server's folder and name it \"TowersTemplate\"");
             }
             return true;
         }

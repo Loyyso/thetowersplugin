@@ -40,9 +40,9 @@ public class TeamListener implements Listener {
             if (!redTeam.hasEntry(playerString)) {
                 redTeam.addEntry(playerString);
                 player.teleport(redHub);
-                player.sendMessage("You joined §cRED§r team!");
+                player.sendMessage("[-> You joined §cRED§r team!");
             } else if (redTeam.getEntries().contains(playerString)) {
-                player.sendMessage("You are already in §cRED§r team!");
+                player.sendMessage("[-> You are already in §cRED§r team!");
                 player.teleport(redHub);
             }
         }
@@ -53,9 +53,9 @@ public class TeamListener implements Listener {
             if (!blueTeam.hasEntry(playerString)) {
                 blueTeam.addEntry(playerString);
                 player.teleport(blueHub);
-                player.sendMessage("You joined §9BLUE§r team!");
+                player.sendMessage("[-> You joined §9BLUE§r team!");
             } else if (blueTeam.getEntries().contains(playerString)){
-                player.sendMessage("You are already in §9BLUE§r team!");
+                player.sendMessage("[-> You are already in §9BLUE§r team!");
                 player.teleport(blueHub);
             }
         }
@@ -68,7 +68,7 @@ public class TeamListener implements Listener {
                 player.teleport(spawn);
             } else if (redTeam.getEntries().contains(playerString)) {
                 redTeam.removeEntry(playerString);
-                player.sendMessage("You left §cRED§r team!");
+                player.sendMessage("[-> You left §cRED§r team!");
                 player.teleport(spawn);
             }
         }
@@ -79,7 +79,7 @@ public class TeamListener implements Listener {
                 player.teleport(spawn);
             } else if (blueTeam.getEntries().contains(playerString)){
                 blueTeam.removeEntry(playerString);
-                player.sendMessage("You left §9BLUE§r team!");
+                player.sendMessage("[-> You left §9BLUE§r team!");
                 player.teleport(spawn);
             }
         }

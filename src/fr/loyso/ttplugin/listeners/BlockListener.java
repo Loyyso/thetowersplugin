@@ -2,25 +2,23 @@
 package fr.loyso.ttplugin.listeners;
 
 import fr.loyso.ttplugin.Plugin;
-import fr.loyso.ttplugin.startinggame.Countdown;
+import fr.loyso.ttplugin.startinggame.Launch;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockCanBuildEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
-import java.io.File;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class BlockListener implements Listener {
     private final Plugin plugin;
@@ -30,7 +28,6 @@ public class BlockListener implements Listener {
 
     public static boolean redReady = false;
     public static boolean blueReady = false;
-
     public static boolean gameStarted = false;
 
     @EventHandler
@@ -62,10 +59,17 @@ public class BlockListener implements Listener {
                         redReadyBlockRedSide.getBlock().setType(Material.EMERALD_BLOCK);
                         redReadyBlockBlueSide.getBlock().setType(Material.EMERALD_BLOCK);
                         redReady = true;
+                        for (Player players : Bukkit.getOnlinePlayers()) {
+                            players.sendMessage("[-> Team §cRED§r is ready!");
+                        }
+
                     } else if (redReadyBlockRedSide.getBlock().getType() == Material.EMERALD_BLOCK) {
                         redReadyBlockRedSide.getBlock().setType(Material.REDSTONE_BLOCK);
                         redReadyBlockBlueSide.getBlock().setType(Material.REDSTONE_BLOCK);
                         redReady = false;
+                        for (Player players : Bukkit.getOnlinePlayers()) {
+                            players.sendMessage("[-> Team §cRED§r isn't ready anymore!");
+                        }
                     }
                 }
                 //Blue side
@@ -74,52 +78,100 @@ public class BlockListener implements Listener {
                         blueReadyBlockBlueSide.getBlock().setType(Material.EMERALD_BLOCK);
                         blueReadyBlockRedSide.getBlock().setType(Material.EMERALD_BLOCK);
                         blueReady = true;
+                        for (Player players : Bukkit.getOnlinePlayers()) {
+                            players.sendMessage("[-> Team §9BLUE§r is ready!");
+                        }
                     } else if (blueReadyBlockBlueSide.getBlock().getType() == Material.EMERALD_BLOCK) {
                         blueReadyBlockBlueSide.getBlock().setType(Material.REDSTONE_BLOCK);
                         blueReadyBlockRedSide.getBlock().setType(Material.REDSTONE_BLOCK);
                         blueReady = false;
+                        for (Player players : Bukkit.getOnlinePlayers()) {
+                            players.sendMessage("[-> Team §9BLUE§r isn't ready anymore!");
+                        }
                     }
                 }
-            }
 
-            Countdown cntdwn = new Countdown();
-            new Thread(cntdwn).start();
-        }
-    }
-    @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent event) {
-        CommandSender commandSender = event.getPlayer();
-        if (commandSender instanceof BlockCommandSender) {
-            File file = new File("");
-            File template = new File(file.getAbsolutePath() + "\\TowersTemplate");
-            if (template.exists()) {
-                plugin.getLogger().info("Template found!");
-                Bukkit.getServer().broadcastMessage("[INFO] Command blocks disabled, restarting server in 5 seconds...");
-                for (int seconds = 5; seconds >= 0; seconds = seconds - 1) {
-                    try {
-                        Thread.sleep(1000);
-                        Bukkit.getServer().broadcastMessage("[INFO] " + seconds);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
+                new Thread(() -> {
+                    long startTime = System.currentTimeMillis();
+                    boolean timerStarted = false;
+                    int time = 10;
+                    while (redReady && blueReady && !gameStarted) {
+                        if ((System.currentTimeMillis() == startTime) && time == 10) {
+                            timerStarted = true;
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Both teams are ready. Starting game in ten seconds!");
+                                players.sendMessage("[-> Ten!");
+                            }
+                            time = 9;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 1000) && time == 9) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Nine!");
+                            }
+                            time = 8;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 2000) && time == 8) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Eight!");
+                            }
+                            time = 7;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 3000) && time == 7) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Seven!");
+                            }
+                            time = 6;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 4000) && time == 6) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Six!");
+                            }
+                            time = 5;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 5000) && time == 5) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Five!");
+                            }
+                            time = 4;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 6000) && time == 4) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Four!");
+                            }
+                            time = 3;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 7000) && time == 3) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Three!");
+                            }
+                            time = 2;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 8000) && time == 2) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Two!");
+                            }
+                            time = 1;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 9000) && time == 1) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> One!");
+                            }
+                            time = 0;
+                        }
+                        if ((System.currentTimeMillis() == startTime + 10000) && time == 0) {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                players.sendMessage("[-> Starting game!");
+                            }
+                            gameStarted = true;
+                            Launch launch = new Launch();
+                            launch.startGame();
+                        }
                     }
-                }
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop");
-            } else {
-                Bukkit.getServer().broadcastMessage("[ERROR] The Towers world not found!");
-                Bukkit.getServer().broadcastMessage("[ERROR] Please put The Towers map, named \"TowersTemplate\" in your server folder");
-            }
-        }
-
-    }
-    @EventHandler
-    public void onBlockCanBuild(BlockCanBuildEvent event) {
-        Material mat = event.getMaterial();
-        Block block = event.getBlock();
-
-        if (mat == Material.STONE) {
-            Block under = block.getRelative(BlockFace.DOWN);
-            if (under.getType() == Material.IRON_BLOCK) {
-                event.setBuildable(false);
+                    if ((!redReady && !blueReady) && timerStarted && !gameStarted || (redReady != blueReady) && timerStarted && !gameStarted) {
+                        for (Player players : Bukkit.getOnlinePlayers()) { players.sendMessage("[-> One of the teams isn't ready anymore. Cancelling countdown..."); }
+                    }
+                }).start();
             }
         }
     }
