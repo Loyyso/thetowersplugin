@@ -3,6 +3,7 @@ package fr.loyso.ttplugin.listeners;
 
 import fr.loyso.ttplugin.Plugin;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,23 +36,24 @@ public class PlayerListener implements Listener {
                 System.out.println("[INFO] The player who just connected before, teleporting him to spawn.");
                 wasConnected.add(playerString);
                 event.getPlayer().teleport(spawn);
-                System.out.println(wasConnected);
             }
         } else if (!wasConnected.contains(playerString)) {
             System.out.println("[INFO] The player who just connected before, teleporting him to spawn.");
             wasConnected.add(playerString);
             event.getPlayer().teleport(spawn);
-            System.out.println(wasConnected);
+            event.getPlayer().setGameMode(GameMode.ADVENTURE);
         } else if (wasConnected.contains(playerString)) {
             System.out.println("[INFO] The player who just connected has disconnected during the current game. He won't be teleported to spawn.");
-            System.out.println(wasConnected);
+            event.getPlayer().setGameMode(GameMode.SURVIVAL);
         }
     }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if(event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-            Bukkit.getServer().broadcast("trers","gds");
+            for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+                player.sendMessage("test");
+            }
         }
     }
 

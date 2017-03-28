@@ -1,14 +1,9 @@
-package fr.loyso.ttplugin;
+package fr.loyso.ttplugin.startinggame;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
-
-import java.awt.*;
-
-import static java.awt.SystemColor.text;
 
 public class Scoreboards {
     public static void setTeams() {
@@ -16,11 +11,17 @@ public class Scoreboards {
         Scoreboard board = scbManager.getMainScoreboard();
         Team redTeam = board.registerNewTeam("Red");
         Team blueTeam = board.registerNewTeam("Blue");
+
         redTeam.setPrefix("§c");
-        redTeam.setSuffix("§r");
         blueTeam.setPrefix("§9");
+
+        redTeam.setSuffix("§r");
         blueTeam.setSuffix("§r");
+
         redTeam.setAllowFriendlyFire(false);
         blueTeam.setAllowFriendlyFire(false);
+
+        redTeam.setCanSeeFriendlyInvisibles(true);
+        blueTeam.setCanSeeFriendlyInvisibles(true);
     }
 }
