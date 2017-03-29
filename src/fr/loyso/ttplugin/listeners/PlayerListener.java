@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.loyso.ttplugin.listeners.BlockListener.gameStarted;
+import static fr.loyso.ttplugin.listeners.ReadyButtonListener.gameStarted;
 
 public class PlayerListener implements Listener {
     private final Plugin plugin;
@@ -33,12 +33,13 @@ public class PlayerListener implements Listener {
         Location spawn = new Location(Bukkit.getWorld("currentGame"), 0, 64, 1024);
         if (!wasConnected.isEmpty()) {
             if (!wasConnected.contains(playerString)) {
-                System.out.println("[INFO] The player who just connected was already connected before, teleporting him to spawn.");
+                System.out.println("[INFO] The player who just connected wasn't connected before, teleporting him to spawn.");
                 wasConnected.add(playerString);
                 event.getPlayer().teleport(spawn);
+                event.getPlayer().setGameMode(GameMode.ADVENTURE);
             }
         } else if (!wasConnected.contains(playerString)) {
-            System.out.println("[INFO] The player who just connected was already connected before, teleporting him to spawn.");
+            System.out.println("[INFO] The player who just connected wasn't connected before, teleporting him to spawn.");
             wasConnected.add(playerString);
             event.getPlayer().teleport(spawn);
             event.getPlayer().setGameMode(GameMode.ADVENTURE);

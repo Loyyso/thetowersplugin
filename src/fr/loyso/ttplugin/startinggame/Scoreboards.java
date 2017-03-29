@@ -1,9 +1,7 @@
 package fr.loyso.ttplugin.startinggame;
 
 import org.bukkit.Bukkit;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.*;
 
 public class Scoreboards {
     public static void setTeams() {

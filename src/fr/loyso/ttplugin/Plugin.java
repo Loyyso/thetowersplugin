@@ -3,8 +3,9 @@ package fr.loyso.ttplugin;
 
 import fr.loyso.ttplugin.commands.CommandNewGame;
 import fr.loyso.ttplugin.commands.CommandPing;
-import fr.loyso.ttplugin.listeners.BlockListener;
+import fr.loyso.ttplugin.listeners.ReadyButtonListener;
 import fr.loyso.ttplugin.listeners.PlayerListener;
+import fr.loyso.ttplugin.listeners.ScoreListener;
 import fr.loyso.ttplugin.listeners.TeamListener;
 import fr.loyso.ttplugin.startinggame.Scoreboards;
 import org.bukkit.Bukkit;
@@ -16,8 +17,9 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class Plugin extends JavaPlugin {
     PlayerListener playerListener = new PlayerListener(this);
-    BlockListener blockListener = new BlockListener(this);
+    ReadyButtonListener readyButtonListener = new ReadyButtonListener(this);
     TeamListener teamListener = new TeamListener(this);
+    ScoreListener scoreListener = new ScoreListener(this);
 
     @Override
     public void onEnable() {
@@ -31,8 +33,9 @@ public class Plugin extends JavaPlugin {
         // Register our events
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(playerListener, this);
-        pm.registerEvents(blockListener, this);
+        pm.registerEvents(readyButtonListener, this);
         pm.registerEvents(teamListener, this);
+        pm.registerEvents(scoreListener, this);
 
         //Other things
         PluginDescriptionFile pdfFile = this.getDescription();

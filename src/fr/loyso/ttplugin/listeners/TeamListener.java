@@ -3,6 +3,7 @@ package fr.loyso.ttplugin.listeners;
 import fr.loyso.ttplugin.Plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,8 +41,10 @@ public class TeamListener implements Listener {
             if (!redTeam.hasEntry(playerString)) {
                 redTeam.addEntry(playerString);
                 player.teleport(redHub);
+                Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_HARP, 100, 2);
                 player.sendMessage("[-> You joined §cRED§r team!");
             } else if (redTeam.getEntries().contains(playerString)) {
+                Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_HARP, 100, 2);
                 player.sendMessage("[-> You are already in §cRED§r team!");
                 player.teleport(redHub);
             }
@@ -53,8 +56,10 @@ public class TeamListener implements Listener {
             if (!blueTeam.hasEntry(playerString)) {
                 blueTeam.addEntry(playerString);
                 player.teleport(blueHub);
+                Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_HARP, 100, 2);
                 player.sendMessage("[-> You joined §9BLUE§r team!");
             } else if (blueTeam.getEntries().contains(playerString)){
+                Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_HARP, 100, 2);
                 player.sendMessage("[-> You are already in §9BLUE§r team!");
                 player.teleport(blueHub);
             }
@@ -68,6 +73,7 @@ public class TeamListener implements Listener {
                 player.teleport(spawn);
             } else if (redTeam.getEntries().contains(playerString)) {
                 redTeam.removeEntry(playerString);
+                Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_HARP, 100, 1);
                 player.sendMessage("[-> You left §cRED§r team!");
                 player.teleport(spawn);
             }
@@ -79,6 +85,7 @@ public class TeamListener implements Listener {
                 player.teleport(spawn);
             } else if (blueTeam.getEntries().contains(playerString)){
                 blueTeam.removeEntry(playerString);
+                Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_HARP, 100, 1);
                 player.sendMessage("[-> You left §9BLUE§r team!");
                 player.teleport(spawn);
             }
