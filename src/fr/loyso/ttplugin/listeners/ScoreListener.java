@@ -2,6 +2,7 @@ package fr.loyso.ttplugin.listeners;
 
 import fr.loyso.ttplugin.Plugin;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -20,10 +21,11 @@ public class ScoreListener implements Listener {
         plugin = instance;
     }
 
+    public static boolean gameEnded = false;
+
     @EventHandler
     public void onPlayerScoring(PlayerMoveEvent event) {
         if (gameStarted) {
-            //bhbdfgfhfyigihko
             ScoreboardManager scbManager = Bukkit.getScoreboardManager();
             Scoreboard board = scbManager.getMainScoreboard();
             Team redTeam = board.getTeam("Red");
@@ -40,7 +42,7 @@ public class ScoreListener implements Listener {
 
             //For red team scoring in blue home
             if (redTeam.getEntries().contains(player.getName())) {
-                if ((playerX <= -83 && playerX >= -85) && (playerY < 201 && playerY >= 200) && (playerZ <= 1153 && playerZ >= 1151)) {
+                if ((playerX <= -83 && playerX >= -85) && (playerY < 201 && playerY >= 200) && (playerZ <= 1153 && playerZ >= 1151) && !gameEnded) {
                     player.teleport(redSpawn);
                     redScore.setScore(redScore.getScore() + 1);
                     for (Player players : Bukkit.getOnlinePlayers()) {
@@ -51,13 +53,30 @@ public class ScoreListener implements Listener {
             }
             //For blue team scoring in red home
             if (blueTeam.getEntries().contains(player.getName())) {
-                if ((playerX <= 85 && playerX >= 83) && (playerY < 201 && playerY >= 200) && (playerZ <= 1153 && playerZ >= 1151)) {
+                if ((playerX <= 85 && playerX >= 83) && (playerY < 201 && playerY >= 200) && (playerZ <= 1153 && playerZ >= 1151) && !gameEnded) {
                     player.teleport(blueSpawn);
                     redScore.setScore(blueScore.getScore() + 1);
                     for (Player players : Bukkit.getOnlinePlayers()) {
-                        players.sendMessage("[-> §9BLUE§r §6scored a point!§r");
+                        players.sendMessage("[-> §9§oBLUE§r §6scored a point!§r");
                     }
                     Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+                }
+            }
+
+            //Red team wins
+            if ((redScore.getScore() >= 5) && !gameEnded) {
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.setGameMode(GameMode.SPECTATOR);
+                    players.sendTitle("§c§lRED§r §6wins!§r", "§oExecute /newgame to start a new game§r", 1, 100, 1);
+                    gameEnded = true;
+                }
+            }
+            //Blue team wins
+            if ((blueScore.getScore() >= 5) && !gameEnded) {
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.setGameMode(GameMode.SPECTATOR);
+                    players.sendTitle("§9§oBLUE§r §6wins!§r", "§oExecute /newgame to start a new game§r", 1, 100, 1);
+                    gameEnded = true;
                 }
             }
         }

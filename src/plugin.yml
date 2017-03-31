@@ -5,11 +5,14 @@ main: fr.loyso.ttplugin.Plugin
 
 commands:
     ping:
-        description: Testing command
+        description: Returns "Pong!"
         usage: /ping
     newgame:
-            description: WIP
+            description: Regenerates a new map
             usage: /newgame
-    stoptest:
-                description: WIP
-                usage: /stoptest
+    startgame:
+            description: WIP
+            usage: /startgame
+    leaveobservers:
+            description: Leave the observers
+            usage: /leaveobservers

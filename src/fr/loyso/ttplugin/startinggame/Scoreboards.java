@@ -9,6 +9,7 @@ public class Scoreboards {
         Scoreboard board = scbManager.getMainScoreboard();
         Team redTeam = board.registerNewTeam("Red");
         Team blueTeam = board.registerNewTeam("Blue");
+        Team observerTeam = board.registerNewTeam("Observers");
 
         redTeam.setPrefix("§c");
         blueTeam.setPrefix("§9");

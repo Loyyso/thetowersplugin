@@ -47,7 +47,7 @@ public class Countdown implements Runnable {
             }
             if ((System.currentTimeMillis() == startTime + 3000) && time == 7) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage("[-> §6Seven!§r");
+                    players.sendMessage("[-> §aSeven!§r");
                     Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_PLING, 100, 1);
                 }
                 time = 6;
@@ -68,7 +68,7 @@ public class Countdown implements Runnable {
             }
             if ((System.currentTimeMillis() == startTime + 6000) && time == 4) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage("[-> §cFour!§r");
+                    players.sendMessage("[-> §6Four!§r");
                     Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_PLING, 100, 1);
                 }
                 time = 3;
@@ -89,7 +89,7 @@ public class Countdown implements Runnable {
             }
             if ((System.currentTimeMillis() == startTime + 9000) && time == 1) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage("[-> §eOne!§r");
+                    players.sendMessage("[-> §cOne!§r");
                     Bukkit.getWorld("currentGame").playSound(new Location(Bukkit.getWorld("currentGame"), 0, 0, 0), Sound.BLOCK_NOTE_PLING, 100, 1);
                 }
                 time = 0;
@@ -102,7 +102,7 @@ public class Countdown implements Runnable {
                 gameStarted = true;
                 new BukkitRunnable() {
                     public void run() {
-                        Launch launch = new Launch();
+                        Launch launch = new Launch(plugin);
                         launch.startGame();
                     }
                 }.runTask(plugin);
