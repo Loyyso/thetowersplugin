@@ -36,7 +36,6 @@ public class MiddleItems implements Runnable {
                 }
             }
             if (playerInItemSpawnZone == true) {
-                for (Player player : Bukkit.getOnlinePlayers()) {player.sendMessage("spawn");}
                 new BukkitRunnable() {
                     public void run() {
                         Bukkit.getWorld("currentGame").dropItemNaturally(ironSpawn, new ItemStack(Material.IRON_INGOT, 1));
