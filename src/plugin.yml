@@ -10,9 +10,6 @@ commands:
     newgame:
             description: Regenerates a new map
             usage: /newgame
-    startgame:
-            description: WIP
-            usage: /startgame
     leaveobservers:
             description: Leave the observers
             usage: /leaveobservers

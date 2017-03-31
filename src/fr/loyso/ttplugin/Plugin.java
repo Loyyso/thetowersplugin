@@ -4,7 +4,6 @@ package fr.loyso.ttplugin;
 import fr.loyso.ttplugin.commands.CommandLeaveObservers;
 import fr.loyso.ttplugin.commands.CommandNewGame;
 import fr.loyso.ttplugin.commands.CommandPing;
-import fr.loyso.ttplugin.commands.CommandStartGame;
 import fr.loyso.ttplugin.listeners.ReadyButtonListener;
 import fr.loyso.ttplugin.listeners.PlayerListener;
 import fr.loyso.ttplugin.listeners.ScoreListener;
@@ -28,7 +27,6 @@ public class Plugin extends JavaPlugin {
         // Register our commands
         getCommand("ping").setExecutor(new CommandPing());
         getCommand("newgame").setExecutor(new CommandNewGame());
-        getCommand("startgame").setExecutor(new CommandStartGame(this));
         getCommand("leaveobservers").setExecutor(new CommandLeaveObservers());
 
         //Create and configure teams
