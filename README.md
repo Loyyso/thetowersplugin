@@ -15,4 +15,4 @@ Minecraft plugin for Spigot/Bukkit servers, for "The Towers" map made by Quijx
 ## Commands
 - ``/ping`` : returns "Pong!". Nothing useful.
 - ``/newgame`` : resets the server's map to start a new game.
-- ``/leaveobservers`` : run this comoand to leave the observers team.
+- ``/leaveobservers`` : run this command to leave the observers team.
